@@ -1,0 +1,79 @@
+select id
+ from uc_users u1,profile p1
+  where u1.pid=p1.pid
+
+
+  AND  p1.gender=(select gender
+                  from uc_users u0,rprofile rp0
+                  where u0.id={id}
+				  AND u0.rpid=rp0.rpid
+                  )
+{age}
+  AND   p1.age>=(select pr0.age_min
+                  from uc_users u0,rprofile pr0
+                  where u0.id={id}
+                  AND  u0.rpid=pr0.rpid
+                   )
+  AND   p1.age<=(select pr0.age_max
+                  from uc_users u0,rprofile pr0
+                  where u0.id={id}
+                  AND  u0.rpid=pr0.rpid
+                   )
+{/age}
+{income}
+   AND   p1.income>(select pr0.income
+                  from uc_users u0,rprofile pr0
+                  where u0.id={id}
+                  AND  u0.rpid=pr0.rpid
+                   )
+{/income}
+{haskid}
+   AND   p1.has_kid=(select pr0.has_kid
+                  from uc_users u0,rprofile pr0
+                  where u0.id={id}
+                  AND  u0.rpid=pr0.rpid
+                   )
+{/haskid}
+{wantkid}
+   AND   p1.income>(select pr0.income
+                  from uc_users u0,rprofile pr0
+                  where u0.id={id}
+                  AND  u0.rpid=pr0.rpid
+                   )
+{/wantkid}
+{height}
+   AND   p1.height>=(select pr0.heightfrom
+                  from uc_users u0,rprofile pr0
+                  where u0.id={id}
+                  AND  u0.rpid=pr0.rpid
+                   )
+   AND   p1.height<=(select pr0.heightto
+                  from uc_users u0,rprofile pr0
+                  where u0.id={id}
+                  AND  u0.rpid=pr0.rpid
+                   )
+{/height}
+{education}
+   AND   p1.education>=(select pr0.education
+                  from uc_users u0,rprofile pr0
+                  where u0.id={id}
+                  AND  u0.rpid=pr0.rpid
+                   )
+{/education}
+{smoke}
+   AND   p1.smoke=(select pr0.smoke
+                  from uc_users u0,rprofile pr0
+                  where u0.id={id}
+                  AND  u0.rpid=pr0.rpid
+                   )
+{/smoke}
+{drink}
+   AND   p1.drink=(select pr0.drink
+                  from uc_users u0,rprofile pr0
+                  where u0.id={id}
+                  AND  u0.rpid=pr0.rpid
+                   )
+{/drink}
+
+
+                   ;

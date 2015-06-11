@@ -1,0 +1,21 @@
+select id
+ from uc_users u1,profile p1
+  where u1.pid=p1.pid
+
+
+  AND  p1.gender=(select gender
+                  from uc_users u0,rprofile rp0
+                  where u0.id={id}
+	          AND u0.rpid=rp0.rpid
+                  )
+   AND   p1.height>=(select pr0.heightfrom
+                  from uc_users u0,rprofile pr0
+                  where u0.id={id}
+                  AND  u0.rpid=pr0.rpid
+                   )
+   AND   p1.height<=(select pr0.heightto
+                  from uc_users u0,rprofile pr0
+                  where u0.id={id}
+                  AND  u0.rpid=pr0.rpid
+                   )
+;

@@ -1,0 +1,18 @@
+select id
+ from uc_users u1,profile p1
+  where u1.pid=p1.pid
+
+
+  AND  p1.gender=(select gender
+                  from uc_users u0,rprofile rp0
+                  where u0.id={id}
+				  AND u0.rpid=rp0.rpid
+                  )
+
+  AND   p1.relationship IN (select rid
+                  from uc_users u0,rpro_rel rr
+                  where u0.id={id}
+                  AND  u0.rpid=rr.rpid
+                   )
+
+;

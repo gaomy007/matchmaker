@@ -1,0 +1,86 @@
+ select uid,fname,p1.age
+ from user u1,profile p1,background b1,Rprofile pr1,Rbackground br1
+  where u1.has_background_bid=b1.bid
+  AND  u1.has_profile_pid=p1.pid
+  AND  u1.require_background_bid=br1.bid
+  AND  u1.require_profile_pid=pr1.pid
+
+  AND  u1.gender=(select sexpref
+                  from user u0
+                  where u0.uid={id}
+                  AND   u1.sexpref=u0.gender)
+
+  AND   p1.age>=(select pr0.age_min
+                  from user u0,Rprofile pr0,Rbackground br0,profile p0,background b0
+                  where u0.uid={id}
+                  AND  u0.has_background_bid=b0.bid
+                  AND  u0.has_profile_pid=p0.pid
+                  AND  u0.require_background_bid=br0.bid
+                  AND  u0.require_profile_pid=pr0.pid
+                   )
+  AND   p1.age<=(select pr0.age_max
+                  from user u0,Rprofile pr0,Rbackground br0,profile p0,background b0
+                  where u0.uid={id}
+                  AND  u0.has_background_bid=b0.bid
+                  AND  u0.has_profile_pid=p0.pid
+                  AND  u0.require_background_bid=br0.bid
+                  AND  u0.require_profile_pid=pr0.pid
+                   )
+   AND   p1.relationship<=(select pr0.relationship
+                  from user u0,Rprofile pr0,Rbackground br0,profile p0,background b0
+                  where u0.uid={id}
+                  AND  u0.has_background_bid=b0.bid
+                  AND  u0.has_profile_pid=p0.pid
+                  AND  u0.require_background_bid=br0.bid
+                  AND  u0.require_profile_pid=pr0.pid
+                   )
+   AND   p1.height>=(select pr0.height
+                  from user u0,Rprofile pr0,Rbackground br0,profile p0,background b0
+                  where u0.uid={id}
+                  AND  u0.has_background_bid=b0.bid
+                  AND  u0.has_profile_pid=p0.pid
+                  AND  u0.require_background_bid=br0.bid
+                  AND  u0.require_profile_pid=pr0.pid
+                   )
+   AND   p1.faith=(select pr0.faith
+                  from user u0,Rprofile pr0,Rbackground br0,profile p0,background b0
+                  where u0.uid={id}
+                  AND  u0.has_background_bid=b0.bid
+                  AND  u0.has_profile_pid=p0.pid
+                  AND  u0.require_background_bid=br0.bid
+                  AND  u0.require_profile_pid=pr0.pid
+                   )
+   AND   p1.smoke<=(select pr0.smoke
+                  from user u0,Rprofile pr0,Rbackground br0,profile p0,background b0
+                  where u0.uid={id}
+                  AND  u0.has_background_bid=b0.bid
+                  AND  u0.has_profile_pid=p0.pid
+                  AND  u0.require_background_bid=br0.bid
+                  AND  u0.require_profile_pid=pr0.pid
+                   )
+   AND   p1.drink<=(select pr0.drink
+                  from user u0,Rprofile pr0,Rbackground br0,profile p0,background b0
+                  where u0.uid={id}
+                  AND  u0.has_background_bid=b0.bid
+                  AND  u0.has_profile_pid=p0.pid
+                  AND  u0.require_background_bid=br0.bid
+                  AND  u0.require_profile_pid=pr0.pid
+                   )
+
+   AND   b1.income>(select br0.income
+                  from user u0,Rprofile pr0,Rbackground br0,profile p0,background b0
+                  where u0.uid={id}
+                  AND  u0.has_background_bid=b0.bid
+                  AND  u0.has_profile_pid=p0.pid
+                  AND  u0.require_background_bid=br0.bid
+                  AND  u0.require_profile_pid=pr0.pid
+                   )
+   AND   b1.education>=(select br0.education
+                  from user u0,Rprofile pr0,Rbackground br0,profile p0,background b0
+                  where u0.uid={id}
+                  AND  u0.has_background_bid=b0.bid
+                  AND  u0.has_profile_pid=p0.pid
+                  AND  u0.require_background_bid=br0.bid
+                  AND  u0.require_profile_pid=pr0.pid
+                   )
+                   ;
